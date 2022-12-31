@@ -1324,7 +1324,7 @@ jsPsych.data = (function() {
   var urlParameter = window.location.search;
   var urlParams = new URLSearchParams(urlParameter);
   var userID = urlParams.get('id');
-  console.log("User ID: "+ userID);
+  console.log("User ID: "+ String(userID));
 
 
   //----------------------------------------------------------------------
@@ -1339,7 +1339,7 @@ jsPsych.data = (function() {
     //console.log("User ID is: " + userID + "\n")
 
       var default_data = {
-        'userID': userID,
+        'userID': String(userID),
         'trial_type': trial.type,
         'trial_index': progress.current_trial_global,
         'time_elapsed': jsPsych.totalTime(),
