@@ -1,6 +1,6 @@
 # Working Memory Tests
 
-Note: This is a fork of the original experiement tasks from: https://github.com/mahiluthra/working_memory_tests
+Note: This is an adaptation of the original experiement tasks from: https://github.com/mahiluthra/working_memory_tests
 
 The following changes have been added to 'symmetry_span_task.html':
 
