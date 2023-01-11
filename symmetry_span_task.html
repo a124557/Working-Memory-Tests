@@ -11,6 +11,7 @@
       <script src="jspsych-6.0.4/plugins/jspsych-fullscreen.js"></script> -->
     <script src="jspsych-6.0.4/plugins/jspsych-spatial-span.js"></script>
     <script src="jspsych-6.0.4/plugins/jspsych-spatial-span-recall.js"></script>
+    <script src="jspsych-6.0.4/plugins/jspsych-spatial-span-recall-demo.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <!--Add platform.js CDN link-->
@@ -195,6 +196,26 @@ var end_test_stimuli = {
      }
  }
 
+ var recallDemo = {
+    type: 'spatial-span-recall-demo',
+    grid_size: function () {
+      return grid
+    },
+    correct_order: function () {
+      return selection
+    },
+    data: function () {
+      return { set_size: setSizes[n] }
+    },
+    on_finish: function () {
+      nSquares = setSizes[n]
+      nSquaresRecalled = jsPsych.data.get().last(1).values()[0].accuracy;
+      n += 1
+      selection = jsPsych.randomization.sampleWithoutReplacement(matrix, setSizes[n])
+      selection_id = -1
+    }
+  }
+
 var recall = {
   type: 'spatial-span-recall',
   grid_size: function(){
@@ -320,13 +341,13 @@ var feedback = {
   }
 
   var squaresDemo = {
-    timeline: [squaresDemoStack, recall, feedback],
-    repetitions: nPracticeTrials
+    timeline: [squaresDemoStack, recallDemo, feedback],
+    repetitions: 1
   }
 
   var symmetryDemo = {
     timeline: [cog_load_demo, feedbackSymm],
-    repetitions: 5
+    repetitions: 1
   }
 
   var fullDemo = {
@@ -345,7 +366,7 @@ var feedback = {
 //timeline = timeline.concat([instructions, squaresDemo, instructions2, symmetryDemo, instructions3, fullDemo, instructions4, test_procedure])
 
   //Test timeline
-  timeline = timeline.concat([instructions4, test_procedure])
+  timeline = timeline.concat([instructions, squaresDemo, instructions2, symmetryDemo, instructions4, test_procedure])
 
   //Disables fullscreen mode
   /*timeline.push({
