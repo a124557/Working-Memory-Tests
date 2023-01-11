@@ -344,6 +344,14 @@ var feedback = {
      }
   }
 
+  /* A timeline for the fulldemo. cog_load_demo and recallDemo call custom plugins (symmetry-judgement-task-demo and spatial-span-recall-demo) which 
+  perform the same functions as cog_load and recall except that they do not write any data other than the accuracy of their respective trials
+  */
+    var test_stack_demo = {
+      timeline: [test_stimuli, cog_load_demo, end_test_stimuli],
+      repetitions: 10
+    }
+
   var test_stack = {
     timeline: [test_stimuli, cog_load, end_test_stimuli],
     repetitions: 10
@@ -361,16 +369,16 @@ var feedback = {
 
   var squaresDemo = {
     timeline: [squaresDemoStack, recallDemo, feedback],
-    repetitions: 5
+    repetitions: 1
   }
 
   var symmetryDemo = {
     timeline: [cog_load_demo, feedbackSymmDemo],
-    repetitions: 5
+    repetitions: 1
   }
 
   var fullDemo = {
-    timeline: [test_stack, recall, feedback],
+    timeline: [test_stack_demo, recallDemo, feedback],
     repetitions: 1
   }
 
@@ -385,7 +393,7 @@ var feedback = {
 //timeline = timeline.concat([instructions, squaresDemo, instructions2, symmetryDemo, instructions3, fullDemo, instructions4, test_procedure])
 
   //Test timeline
-  timeline = timeline.concat([instructions, squaresDemo, instructions2, symmetryDemo, instructions4, test_procedure])
+  timeline = timeline.concat([instructions, squaresDemo, instructions2, symmetryDemo, instructions3, fullDemo, instructions4, test_procedure])
 
   //Disables fullscreen mode
   /*timeline.push({
