@@ -1325,8 +1325,6 @@ jsPsych.data = (function() {
   var urlParams = new URLSearchParams(urlParameter);
   var userID = urlParams.get('id');
   console.log("User ID: "+ String(userID));
-
-
   //----------------------------------------------------------------------
 
   module.write = function(data_object) {

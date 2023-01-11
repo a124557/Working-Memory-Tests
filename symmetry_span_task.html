@@ -4,6 +4,7 @@
     <script src="jspsych-6.0.4/jspsych.js"></script>
     <script src="jspsych-6.0.4/plugins/jspsych-html-keyboard-response.js"></script>
     <script src="jspsych-6.0.4/plugins/jspsych-symmetry-judgement-task.js"></script>
+    <script src="jspsych-6.0.4/plugins/jspsych-symmetry-judgement-task-demo.js"></script>
     <script src="jspsych-6.0.4/plugins/jspsych-survey-text.js"></script>
     <script src="jspsych-6.0.4/plugins/jspsych-instructions.js"></script>
     <!-- 
@@ -136,7 +137,7 @@ var instructions = {
 
   var nProportionDemo = 0
   var cog_load_demo = {
-    type: 'symmetry-judgement-task',
+    type: 'symmetry-judgement-task-demo',
     size: 8,
     trial_duration: null,
     number_darkened: [17, 18, 19],
@@ -196,6 +197,7 @@ var end_test_stimuli = {
      }
  }
 
+ // This plugin provides feedback for the spatial span recall trials
  var recallDemo = {
     type: 'spatial-span-recall-demo',
     grid_size: function () {
@@ -209,7 +211,7 @@ var end_test_stimuli = {
     },
     on_finish: function () {
       nSquares = setSizes[n]
-      nSquaresRecalled = jsPsych.data.get().last(1).values()[0].accuracy;
+      nSquaresRecalled = jsPsych.data.get().last(1).values()[0].spatial_demo_accuracy;
       n += 1
       selection = jsPsych.randomization.sampleWithoutReplacement(matrix, setSizes[n])
       selection_id = -1
@@ -237,9 +239,9 @@ var feedback = {
     type: 'instructions',
     pages: function(){
       pageOne = "<div style='font-size:20px;'><b>You recalled <font color='blue'>"+nSquaresRecalled+" out of "+nSquares+"</font> squares in their correct order.</b><br><br>"
-      if (n>nPracticeTrials){
+      /*if (n>nPracticeTrials){
         pageOne+= "You made <font color='blue'>"+nSymmetryAcc+" out of "+nSquares+"</font> accurate symmetry judgement(s).<br><br></div>"
-      }
+      }*/
       return [pageOne]
     },
     allow_backward: false,
@@ -249,6 +251,23 @@ var feedback = {
       nSymmetryAcc = 0
     }
   }
+
+    var feedbackSymmDemo = {
+        type: 'html-keyboard-response',
+        stimulus: function () {
+          var text = ""
+          var accuracy = jsPsych.data.get().last(1).values()[0].symm_demo_accuracy
+          if (accuracy == 1) {
+            text += '<div style="font-size:35px; color:rgb(0 220 0)"><b>Correct</div>'
+          } else {
+            text += '<div style="font-size:35px; color:rgb(240 0 0)"><b>Incorrect</div>'
+          }
+          //text += '<div style="font-size:30px; color:rgb(0 0 0)"><br><br>New trial starting now.</div>'
+          return text
+        },
+        choices: jsPsych.NO_KEYS,
+        trial_duration: 1000
+      }
 
   var feedbackSymm = {
     type: 'html-keyboard-response',
@@ -342,12 +361,12 @@ var feedback = {
 
   var squaresDemo = {
     timeline: [squaresDemoStack, recallDemo, feedback],
-    repetitions: 1
+    repetitions: 5
   }
 
   var symmetryDemo = {
-    timeline: [cog_load_demo, feedbackSymm],
-    repetitions: 1
+    timeline: [cog_load_demo, feedbackSymmDemo],
+    repetitions: 5
   }
 
   var fullDemo = {

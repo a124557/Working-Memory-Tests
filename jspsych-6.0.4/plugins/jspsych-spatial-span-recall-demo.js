@@ -203,14 +203,14 @@ function end_trial() {
 
   // gather the data to store for the trial
   var trial_data = {
-    rt: response.rt,
-    recall: recalledGrid.join("_"),
-    correct_answer: correctIndex.join("_"),
-    stimuli: correctGrid.map(subarr => subarr.join(":")).join("_"),
-    accuracy: response.button}
+    //rt: response.rt,
+    //recall: recalledGrid.join("_"),
+    //correct_answer: correctIndex.join("_"),
+    //stimuli: correctGrid.map(subarr => subarr.join(":")).join("_"),
+    spatial_demo_accuracy: response.button}
 
   // move on to the next trial
-  jsPsych.finishTrial();
+  jsPsych.finishTrial(trial_data);
 }
 };
 
