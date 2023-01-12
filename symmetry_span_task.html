@@ -58,6 +58,8 @@
     }
   }
 
+  console.log(setSizes);
+
   var grid = 4;
   var matrix = [];
   for (var i=0; i<grid; i++){
@@ -239,9 +241,9 @@ var feedback = {
     type: 'instructions',
     pages: function(){
       pageOne = "<div style='font-size:20px;'><b>You recalled <font color='blue'>"+nSquaresRecalled+" out of "+nSquares+"</font> squares in their correct order.</b><br><br>"
-      /*if (n>nPracticeTrials){
+      if (n>nPracticeTrials){
         pageOne+= "You made <font color='blue'>"+nSymmetryAcc+" out of "+nSquares+"</font> accurate symmetry judgement(s).<br><br></div>"
-      }*/
+      }
       return [pageOne]
     },
     allow_backward: false,
@@ -359,7 +361,7 @@ var feedback = {
 
   var test_procedure = {
     timeline: [test_stack, recall, feedback],
-    repetitions: 1
+    repetitions: nTrials
   }
 
   var squaresDemoStack = {
@@ -369,17 +371,17 @@ var feedback = {
 
   var squaresDemo = {
     timeline: [squaresDemoStack, recallDemo, feedback],
-    repetitions: 1
+    repetitions: nPracticeTrials
   }
 
   var symmetryDemo = {
     timeline: [cog_load_demo, feedbackSymmDemo],
-    repetitions: 1
+    repetitions: 5
   }
 
   var fullDemo = {
     timeline: [test_stack_demo, recallDemo, feedback],
-    repetitions: 1
+    repetitions: nfullDemo
   }
 
   //timeline = [p_details]
@@ -390,7 +392,6 @@ var feedback = {
     type: 'fullscreen',
     fullscreen_mode: true
   });*/
-//timeline = timeline.concat([instructions, squaresDemo, instructions2, symmetryDemo, instructions3, fullDemo, instructions4, test_procedure])
 
   //Test timeline
   timeline = timeline.concat([instructions, squaresDemo, instructions2, symmetryDemo, instructions3, fullDemo, instructions4, test_procedure])
