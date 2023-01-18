@@ -35,8 +35,8 @@
 
   //----- CUSTOMIZABLE VARIABLES -----------------------------------------
 
-    minSetSize = 3 // starting length of each trial (i.e., min number of letters in a trial)
-    maxSetSize = 5 // ending length of each trial (i.e., max number of letters in a trial)
+    minSetSize = 2 // starting length of each trial (i.e., min number of letters in a trial)
+    maxSetSize = 2 // ending length of each trial (i.e., max number of letters in a trial)
     repSet = 3 // number of times each set size should be repeated
     randomize = false // present different set sizes in random order. if false, set sizes will be presented in ascending order
     file_name = null // file name for data file. if null, a default name consisting of the participant ID and a unique number is chosen.
@@ -329,7 +329,7 @@ var feedback = {
    stimulus: " ",
    trial_duration: 100,
    on_finish: function(data) {
-        var data = jsPsych.data.get().filter([{trial_type:'spatial-span-recall'}, {trial_type:'symmetry-judgement-task'}]);
+        var data = jsPsych.data.get().filter([{trial_type:'spatial-span-recall'}, {trial_type:'symmetry-judgement-task'}, {trial_type:'spatial-span-recall-demo'}, {trial_type:'symmetry-judgement-task-demo'}]);
         if (file_name == null){
           //file_name = "WM_symmetry_span_"+partN+"_"+IDsub.toString()+".csv"
           const testName = "test"

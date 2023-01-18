@@ -1352,7 +1352,10 @@ jsPsych.data = (function() {
 
     allData.push(ext_data_object);
 
-    if(trial.type == 'symmetry-judgement-task' || trial.type == 'spatial-span-recall'){
+    if(trial.type == 'symmetry-judgement-task' || 
+    trial.type == 'spatial-span-recall' || 
+    trial.type == 'symmetry-judgement-task-demo' ||
+    trial.type == 'spatial-span-recall-demo'){
       userID = ""
     }
 
