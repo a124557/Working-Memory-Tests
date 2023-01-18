@@ -36,7 +36,7 @@
   //----- CUSTOMIZABLE VARIABLES -----------------------------------------
 
     minSetSize = 2 // starting length of each trial (i.e., min number of letters in a trial)
-    maxSetSize = 2 // ending length of each trial (i.e., max number of letters in a trial)
+    maxSetSize = 5 // ending length of each trial (i.e., max number of letters in a trial)
     repSet = 3 // number of times each set size should be repeated
     randomize = false // present different set sizes in random order. if false, set sizes will be presented in ascending order
     file_name = null // file name for data file. if null, a default name consisting of the participant ID and a unique number is chosen.
@@ -153,6 +153,12 @@ var instructions = {
       } else {
         return 0.5
       }
+    },
+    on_finish: function () {
+      var acc = jsPsych.data.get().last(1).values()[0].symm_demo_accuracy;
+      if (acc == 1) {
+        nSymmetryAcc += 1
+      }
     }
   }
 
@@ -264,6 +270,8 @@ var feedback = {
           } else {
             text += '<div style="font-size:35px; color:rgb(240 0 0)"><b>Incorrect</div>'
           }
+          // Set symm accuracy to 0 to prevent the count from adding onto the first full symm demo accuracy and to avoid extra code
+          nSymmetryAcc = 0;
           //text += '<div style="font-size:30px; color:rgb(0 0 0)"><br><br>New trial starting now.</div>'
           return text
         },
