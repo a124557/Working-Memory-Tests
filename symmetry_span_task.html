@@ -58,7 +58,6 @@
     }
   }
 
-  console.log(setSizes);
 
   var grid = 4;
   var matrix = [];
@@ -74,6 +73,7 @@
   if (randomize){
     setSizes = jsPsych.randomization.sampleWithoutReplacement(setSizes, nTrials)} // shuffle through the set sizes
 
+
   var squaregridDemoArray = [3,4,4]
   var fullDemoArray = [2,3,4,5]
   var nPracticeTrials = squaregridDemoArray.length //number of practice trials for square memorization
@@ -88,6 +88,8 @@
 
   var nSymmetryAcc = 0 //feedback
   var nSquaresRecalled = 0 //feedback
+
+  console.log(setSizes)
 
 var instructions = {
     type: 'instructions',
@@ -403,7 +405,7 @@ var feedback = {
 
   //Test timeline
   timeline = timeline.concat([instructions, squaresDemo, instructions2, symmetryDemo, instructions3, fullDemo, instructions4, test_procedure])
-
+//timeline = timeline.concat([instructions, squaresDemo, instructions3, fullDemo, instructions4, test_procedure])
   //Disables fullscreen mode
   /*timeline.push({
   type: 'fullscreen',
