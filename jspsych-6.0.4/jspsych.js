@@ -1323,8 +1323,8 @@ jsPsych.data = (function() {
   //Using the URLSearchParams API to retrieve the user id from the url parameter
   var urlParameter = window.location.search;
   var urlParams = new URLSearchParams(urlParameter);
-  var userID = urlParams.get('id');
-  console.log("User ID: "+ String(userID));
+  var token = urlParams.get('token');
+  console.log("Token: "+ String(token));
   //----------------------------------------------------------------------
 
   module.write = function(data_object) {
@@ -1337,7 +1337,7 @@ jsPsych.data = (function() {
     //console.log("User ID is: " + userID + "\n")
 
       var default_data = {
-        'userID': String(userID),
+        'token': String(token),
         'trial_type': trial.type,
         'trial_index': progress.current_trial_global,
         'time_elapsed': jsPsych.totalTime(),
@@ -1356,7 +1356,7 @@ jsPsych.data = (function() {
     trial.type == 'spatial-span-recall' || 
     trial.type == 'symmetry-judgement-task-demo' ||
     trial.type == 'spatial-span-recall-demo'){
-      userID = ""
+      token = ""
     }
 
   };

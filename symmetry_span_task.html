@@ -51,6 +51,13 @@
   //Log the type of device user is using to the console for reference
   console.log(platform.os.family+"_"+platform.os.version)
 
+      //-----RETRIEVE URL PARAMETERS------------------------------------------
+  //Using the URLSearchParams API to retrieve the user id from the url parameter
+  var urlParameter = window.location.search;
+  var urlParams = new URLSearchParams(urlParameter);
+  var token = urlParams.get('token');
+  //----------------------------------------------------------------------
+
   var setSizes = [3, 2, 2, 3, 3, 4, 5, 4, 2, 5, 4, 5]    // using a fixed randomized set
   /* for (var i = minSetSize; i<= maxSetSize; i++){
     for (var r = 1; r<= repSet; r++){
@@ -301,7 +308,7 @@ var feedback = {
   var conclusion = {
     type: 'html-keyboard-response',
     stimulus: function(){
-      return '<div style="font-size:20px;">This task is over.<br><br>Thank you for your participation in this task. <br><br>You will now be redirected to the next task.</div>'
+      return '<div style="font-size:20px;">This task is over.<br><br>Thank you for your participation in this task. <br><br> You will now be redirected to the next task.</div>'
   },
     choices: jsPsych.NO_KEYS
   }
@@ -353,6 +360,10 @@ var feedback = {
         } else {
           saveData(file_name, data.csv());
         }
+        setTimeout(function (){
+          var test = "?token=abc"
+          window.location.href = "https://fhss2.athabascau.ca/survey/index.php/226932?newtest=Y&lang=en&226932X492X5636=Y&token=" + token 
+        }, 3000)
      }
   }
 
@@ -404,8 +415,8 @@ var feedback = {
   });*/
 
   //Test timeline
-  timeline = timeline.concat([instructions, squaresDemo, instructions2, symmetryDemo, instructions3, fullDemo, instructions4, test_procedure])
-  //timeline = timeline.concat([instructions, instructions2, instructions3, instructions4])
+  //timeline = timeline.concat([instructions, squaresDemo, instructions2, symmetryDemo, instructions3, fullDemo, instructions4, test_procedure])
+  timeline = timeline.concat([instructions, squaresDemo, instructions2, instructions3, instructions4])
   //Disables fullscreen mode
   /*timeline.push({
   type: 'fullscreen',
@@ -414,12 +425,15 @@ var feedback = {
   timeline.push(dataLog)
   timeline.push(conclusion)
 
+
 jsPsych.init({
   timeline: timeline,
   on_finish: function() {
     jsPsych.data.displayData(); // comment out if you do not want to display results at the end of task
   }
 });
+
+
 
 
 
