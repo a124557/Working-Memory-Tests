@@ -350,7 +350,13 @@ var feedback = {
         if (file_name == null){
           //file_name = "WM_symmetry_span_"+partN+"_"+IDsub.toString()+".csv"
           const testName = "test"
-          file_name = "Symmetry_Span_" + token + ".csv";
+          if(local) {
+            file_name = "Symmetry_Span_" + token + ".csv";
+          }
+          else {
+            // The .csv file extension will be added by the PHP file which will also account for duplicates
+            file_name = "Symmetry_Span_" + token;
+          }
         }
         else{
           file_name += ".csv"
