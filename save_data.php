@@ -8,10 +8,10 @@ If (!is_dir($dir)) {
 }
 // the $_POST[] array will contain the passed in filename and data
 // the directory "data" is writable by the server (chmod 777)
-$filename = "data/".$_POST['filename'];
+$filename = "data/".$_POST['filename'].".csv";
 $num = 1;
 while(file_exists($filename)) {
-	$filename = "data/".$_POST['filename'];
+	$filename = "data/".$_POST['filename']."_".$num.".csv";
 	$num++;
 }
 $data = $_POST['filedata'];

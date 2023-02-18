@@ -1335,16 +1335,19 @@ jsPsych.data = (function() {
 
     //console.log("Trial type: " + trial.type)
     //console.log("User ID is: " + userID + "\n")
+    const now = new Date();
+    const utcTimestamp = `${now.getUTCFullYear()}-${(now.getUTCMonth() + 1).toString().padStart(2, '0')}-${now.getUTCDate().toString().padStart(2, '0')} ${now.getUTCHours().toString().padStart(2, '0')}:${now.getUTCMinutes().toString().padStart(2, '0')}:${now.getUTCSeconds().toString().padStart(2, '0')}`;
+
+
 
       var default_data = {
         'token': String(token),
         'trial_type': trial.type,
         'trial_index': progress.current_trial_global,
         'time_elapsed': jsPsych.totalTime(),
+        'timeStamp_UTC': utcTimestamp,
         'internal_node_id': jsPsych.currentTimelineNodeID()
       };
-
-
 
 
 

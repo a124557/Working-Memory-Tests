@@ -147,7 +147,7 @@ var start_time = Date.now();
           }
           console.log(acc)
           choice = 0
-        console.log(indexOfArray(correctGrid[1], matrix), recalledGrid[1])
+        console.log(indexOfArray(correctGrid[1], matrix), recalledGrid[1]);
     after_response(acc);
   });
 
