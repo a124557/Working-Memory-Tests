@@ -144,8 +144,6 @@ var start_time = Date.now();
           acc += 1
         }
       }
-    //  console.log(correctLetters, )
-    //console.log(indexOfArray(correctGrid[1], matrix), recalledGrid[1])
 after_response(acc);
 });
 
