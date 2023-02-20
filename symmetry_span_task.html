@@ -383,20 +383,28 @@ var feedback = {
   };
 
   function saveData(filename, filedata){
-        $.ajax({
+    return new Promise(function (resolve, reject) {
+      $.ajax({
               type:'post',
               cache: false,
               url: 'save_data.php', // this is the path to the above PHP script
-              data: {filename: filename, filedata: filedata}
+              data: {filename: filename, filedata: filedata},
+              success: function() {
+                resolve();
+              },
+              error: function() {
+                reject();
+              }
         });
-  }
+    })
+  };
 
   var IDsub = Date.now();
   var dataLog = {
    type: 'html-keyboard-response',
    stimulus: " ",
    trial_duration: 100,
-   on_finish: function(data) {
+   on_finish: async function(data) {
         var data = jsPsych.data.get().filter([{trial_type:'spatial-span-recall'}, {trial_type:'symmetry-judgement-task'}, {trial_type:'spatial-span-recall-demo'}, {trial_type:'symmetry-judgement-task-demo'}]);
         if (file_name == null){
           //file_name = "WM_symmetry_span_"+partN+"_"+IDsub.toString()+".csv"
@@ -415,11 +423,11 @@ var feedback = {
         if (local){
           data.localSave('csv', file_name );
         } else {
-          saveData(file_name, data.csv());
+          await saveData(file_name, data.csv());
         }
-        setTimeout(function (){
+        setTimeout(function() {
           window.location.href = "https://fhss2.athabascau.ca/survey/index.php/226932?newtest=Y&lang=en&226932X492X5636=Y&token=" + token;
-        }, 5000)
+        }, 5000);
      }
   };
 
@@ -471,8 +479,8 @@ var feedback = {
   });*/
 
   //Test timeline
-  //timeline = timeline.concat([instructions, squaresDemo, instructions2, symmetryDemo, instructions3, fullDemo, instructions4, test_procedure]);
-  timeline = timeline.concat([instructions, instructions2, instructions3, instructions4]);
+  timeline = timeline.concat([instructions, squaresDemo, instructions2, symmetryDemo, instructions3, fullDemo, instructions4, test_procedure]);
+  //timeline = timeline.concat([instructions, instructions2, instructions3, instructions4]);
   //Disables fullscreen mode
   /*timeline.push({
   type: 'fullscreen',
