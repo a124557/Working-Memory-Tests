@@ -244,7 +244,7 @@ function end_trial() {
   // gather the data to store for the trial
   var trial_data = {
     rt: response.rt,
-    accuracy: response.correct
+    symm_accuracy: response.correct
   };
 
   // move on to the next trial

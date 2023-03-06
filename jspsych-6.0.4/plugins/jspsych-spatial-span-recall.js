@@ -207,7 +207,7 @@ function end_trial() {
     recall: recalledGrid.join("_"),
     correct_answer: correctIndex.join("_"),
     stimuli: correctGrid.map(subarr => subarr.join(":")).join("_"),
-    accuracy: response.button}
+    spatial_accuracy: response.button}
 
   // move on to the next trial
   jsPsych.finishTrial(trial_data);

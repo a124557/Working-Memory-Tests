@@ -53,8 +53,8 @@
 
       //-----RETRIEVE URL PARAMETERS------------------------------------------
   //Using the URLSearchParams API to retrieve the user id from the url parameter
-  var urlParameter = window.location.search;
-  var urlParams = new URLSearchParams(urlParameter);
+  var urlParameters = window.location.search;
+  var urlParams = new URLSearchParams(urlParameters);
   var token = urlParams.get('token');
   //----------------------------------------------------------------------
 
@@ -115,9 +115,9 @@ var instructions = {
       pageTwo = `<div style="font-size:20px;">
         SQUARE MEMORIZATION.
         <br><br> 
-        In the centre of the screen, you will see a series of grids with one of squares in the grid turning red (see example below). 
-        There could be 3 to 6 grids presented in sequence and once completed, you need to recall which squares turned red and the order in which 
-        they turned red by clicking on the appropriate squares in the order they were presented.  If you make a mistake use the provided "Backspace" 
+        In the center of the screen, you will see a series of grids with one of the squares in the grid turning red (see example below). 
+        There could be 2 to 5 grids presented in the sequence and once completed, you need to recall which squares turned red and the order in which 
+        they turned red by clicking on the appropriate squares in the order they were presented.  If you make a mistake, use the provided "Backspace" 
         button to clear your last response.  If you forget one of the squares, guess the best you can for that one, and select the rest in their correct order. 
         Remember, it is important that you select the squares in the order that you saw them. 
         <br><br>
@@ -139,7 +139,7 @@ var instructions = {
       pageOne = `<div style="font-size:20px;">
         SYMMETRY JUDGEMENTS.
         <br><br>
-        In the centre of the screen, a black and white picture will appear and you have to judge if the picture is symmetrical or asymmetrical 
+        In the center of the screen, a black-and-white picture will appear and you must judge if the picture is symmetrical or asymmetrical 
         by clicking the appropriate button. A picture is symmetrical if its left half is identical to the right half when flipped. 
         Below are examples of symmetrical and asymmetrical pictures.
         <br><br>
@@ -163,10 +163,10 @@ var instructions = {
         <br><br>
         We will now practice the two tasks together. The grid with the red square will be presented as before but in between each grid 
         presentation, you will be required to make a symmetry judgement. Try making the symmetry judgement as soon as possible as each symmetry 
-        judgement picture will be presented for only 6 seconds. After 3 to 6 squares have been presented, alternating with symmetry judgments, 
-        the recall grid will appear where you would use the mouse to select the presented squares in their correct order.
+        judgement picture will be presented for only 6 seconds. After 2 to 5 squares have been presented, alternating with symmetry judgments, 
+        the recall grid will appear where you will use the mouse to select the presented squares in their correct order.
         <br><br>
-        Press "Next" to start next practice rounds.
+        Press "Next" to start the next practice rounds.
         <br><br>
         </div>`;
       //pageTwo = '<div style="font-size:20px;">After the symmetry judgement, you will be shown another colored square to remember,<br>which will be followed by another symmetry judgement.<br><br>Therefore, colored square presentations and symmetry judgements will alternate.<br>After 3 to 6 squares have been presented, the recall grid will appear.<br>Use the mouse to select the presented squares in their correct order.<br><br>Do you have any questions?<br>Press "Next" to start practice rounds.<br><br></div>';
@@ -182,7 +182,7 @@ var instructions = {
     pages: function(){
       pageOne = `<div style="font-size:20px;">
         We have finished with the practice trials and will start with the main trials. There will be 12 blocks of trials. This task 
-        should take approximately xx minutes. 
+        should take approximately 4 minutes. 
         <br><br>
         Press "Next" to start the main trials. 
         <br><br>
@@ -227,7 +227,7 @@ var cog_load = {
   number_darkened: [17, 18, 19],
   stimulus: "Is this image symmetric?",
   on_finish: function(){
-    var acc = jsPsych.data.get().last(1).values()[0].accuracy;
+    var acc = jsPsych.data.get().last(1).values()[0].symm_accuracy;
     if (acc==1){
       nSymmetryAcc+=1;
     }
@@ -294,7 +294,7 @@ var recall = {
     return {set_size: setSizes[n]};  },
   on_finish: function(){
     nSquares = setSizes[n];
-    nSquaresRecalled = jsPsych.data.get().last(1).values()[0].accuracy;
+    nSquaresRecalled = jsPsych.data.get().last(1).values()[0].spatial_accuracy;
     n+=1;
     selection = jsPsych.randomization.sampleWithoutReplacement(matrix, setSizes[n]);
     selection_id = -1;
@@ -426,7 +426,7 @@ var feedback = {
           await saveData(file_name, data.csv());
         }
         setTimeout(function() {
-          window.location.href = "https://fhss2.athabascau.ca/survey/index.php/226932?newtest=Y&lang=en&226932X492X5636=Y&token=" + token;
+          window.location.href = "http://localhost:8080/redirect.php" + urlParameters;
         }, 5000);
      }
   };
