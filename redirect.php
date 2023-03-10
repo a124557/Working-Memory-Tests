@@ -10,8 +10,8 @@ $token = isset($_GET['token']) ? $_GET['token'] : '';
 
 // Define the two external URLs to redirect the user to
 $urls = array(
-    'http://localhost:8080',
-    'https://www.testable.org/experiment/11502/795217/start'
+    '/symmetry_span_task.html',
+    'https://www.testable.org/experiment/11502/911162/start'
 );
 
 // Define the URL to redirect the user to after completing two experiments

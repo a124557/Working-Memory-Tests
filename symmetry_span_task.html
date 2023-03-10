@@ -426,7 +426,7 @@ var feedback = {
           await saveData(file_name, data.csv());
         }
         setTimeout(function() {
-          window.location.href = "http://localhost:8080/redirect.php" + urlParameters;
+          window.location.href = "/redirect.php" + urlParameters;
         }, 5000);
      }
   };
@@ -479,8 +479,8 @@ var feedback = {
   });*/
 
   //Test timeline
-  timeline = timeline.concat([instructions, squaresDemo, instructions2, symmetryDemo, instructions3, fullDemo, instructions4, test_procedure]);
-  //timeline = timeline.concat([instructions, squaresDemo, instructions2, instructions3, instructions4]);
+  //timeline = timeline.concat([instructions, squaresDemo, instructions2, symmetryDemo, instructions3, fullDemo, instructions4, test_procedure]);
+  timeline = timeline.concat([instructions, squaresDemo, instructions2, instructions3, instructions4]);
   //Disables fullscreen mode
   /*timeline.push({
   type: 'fullscreen',
